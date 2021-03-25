@@ -1,0 +1,50 @@
+// For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.134.0/containers/javascript-node
+{
+  "name": "blog",
+  "build": {
+    "dockerfile": "Dockerfile",
+    // Update 'VARIANT' to pick a Node version: 10, 12, 14
+    "args": { "VARIANT": "14" }
+  },
+
+  // Set *default* container specific settings.json values on container create.
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/zsh",
+    "terminal.integrated.cwd": "${containerWorkspaceFolder}",
+    "extensions.ignoreRecommendations": true,
+    "editor.renderControlCharacters": true,
+    "editor.renderWhitespace": "all"
+  },
+
+  // Add the IDs of extensions you want installed when the container is created.
+  "extensions": [
+    "editorconfig.editorconfig",
+    "medo64.render-crlf",
+    "VisualStudioExptTeam.vscodeintellicode"
+  ],
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // "forwardPorts": [3000],
+
+  // Specifies a command that should be run after the container has been created.
+  "postCreateCommand": "sudo chown node node_modules .cache public && test -f ./package.json && yarn install",
+
+  // Comment out the next line to run as root instead.
+  "remoteUser": "node",
+
+  // Improve container disk performance
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=delegated",
+  "workspaceFolder": "/workspace",
+  "mounts": [
+    // Avoiding extension reinstalls on container rebuild
+    "source=blog-extensions,target=/home/node/.vscode-server/extensions,type=volume",
+    // Use a targeted named volume
+    "source=blog-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume",
+    "source=blog-cache,target=${containerWorkspaceFolder}/.cache,type=volume",
+    "source=blog-public,target=${containerWorkspaceFolder}/public,type=volume"
+  ],
+
+  // Indicates whether VS Code should stop the containers when the VS Code window is closed / shut down.
+  "shutdownAction": "stopContainer"
+}

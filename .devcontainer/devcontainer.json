@@ -14,21 +14,25 @@
     "terminal.integrated.cwd": "${containerWorkspaceFolder}",
     "extensions.ignoreRecommendations": true,
     "editor.renderControlCharacters": true,
-    "editor.renderWhitespace": "all"
+    "editor.renderWhitespace": "all",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "prettier.prettierPath": "${containerWorkspaceFolder}/node_modules/prettier"
   },
 
   // Add the IDs of extensions you want installed when the container is created.
   "extensions": [
     "editorconfig.editorconfig",
     "medo64.render-crlf",
-    "VisualStudioExptTeam.vscodeintellicode"
+    "VisualStudioExptTeam.vscodeintellicode",
+    "esbenp.prettier-vscode"
   ],
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [3000],
 
   // Specifies a command that should be run after the container has been created.
-  "postCreateCommand": "sudo chown node node_modules .cache public && test -f ./package.json && yarn install",
+  "postCreateCommand": "sudo chown node node_modules && test -f ./package.json && yarn install",
 
   // Comment out the next line to run as root instead.
   "remoteUser": "node",
@@ -40,9 +44,7 @@
     // Avoiding extension reinstalls on container rebuild
     "source=blog-extensions,target=/home/node/.vscode-server/extensions,type=volume",
     // Use a targeted named volume
-    "source=blog-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume",
-    "source=blog-cache,target=${containerWorkspaceFolder}/.cache,type=volume",
-    "source=blog-public,target=${containerWorkspaceFolder}/public,type=volume"
+    "source=blog-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
   ],
 
   // Indicates whether VS Code should stop the containers when the VS Code window is closed / shut down.

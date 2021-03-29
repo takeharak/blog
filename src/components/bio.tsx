@@ -8,10 +8,11 @@
 import * as React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
+import { BioQuery } from "../generated/graphql"
 
 const Bio: React.FC = () => {
-  const data = useStaticQuery(graphql`
-    query BioQuery {
+  const data: BioQuery = useStaticQuery(graphql`
+    query Bio {
       site {
         siteMetadata {
           author {
@@ -27,8 +28,8 @@ const Bio: React.FC = () => {
   `)
 
   // Set these values by editing "siteMetadata" in gatsby-config.js
- const author = data.site.siteMetadata?.author
- const social = data.site.siteMetadata?.social
+  const author = data.site?.siteMetadata?.author
+  const social = data.site?.siteMetadata?.social
 
   return (
     <div className="bio">
@@ -44,9 +45,9 @@ const Bio: React.FC = () => {
       />
       {author?.name && (
         <p>
-          Written by <strong>{author.name}</strong> {author?.summary || undefined}
+          Written by <strong>{author.name}</strong> {author.summary}
           {` `}
-          <a href={`https://twitter.com/${social?.twitter || ``}`}>
+          <a href={`https://twitter.com/${social?.twitter ?? ``}`}>
             You should follow them on Twitter
           </a>
         </p>

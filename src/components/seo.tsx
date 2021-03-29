@@ -9,16 +9,18 @@ import * as React from "react"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-interface Props extends Pick<React.HTMLAttributes<HTMLHtmlElement>, "lang"> {
-  description?: string
+import { SeoQuery, SiteSiteMetadata } from "../generated/graphql"
+
+interface Props
+  extends Pick<SiteSiteMetadata, "description" | "title">,
+    Pick<React.HTMLAttributes<HTMLHtmlElement>, "lang"> {
   meta?: Array<{ name: string; content: string }>
-  title?: string
 }
 
 const SEO: React.FC<Props> = ({ description, lang, meta, title }) => {
-  const { site } = useStaticQuery(
+  const data: SeoQuery = useStaticQuery(
     graphql`
-      query {
+      query Seo {
         site {
           siteMetadata {
             title
@@ -32,28 +34,28 @@ const SEO: React.FC<Props> = ({ description, lang, meta, title }) => {
     `
   )
 
-  const metaDescription = description || site.siteMetadata.description
-  const defaultTitle = site.siteMetadata?.title
+  const metaDescription = description ?? data.site?.siteMetadata?.description
+  const defaultTitle = data.site?.siteMetadata?.title
 
   return (
     <Helmet
       htmlAttributes={{
         lang,
       }}
-      title={title}
+      title={title ?? ``}
       titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : undefined}
       meta={[
         {
           name: `description`,
-          content: metaDescription,
+          content: metaDescription ?? ``,
         },
         {
           property: `og:title`,
-          content: title,
+          content: title ?? ``,
         },
         {
           property: `og:description`,
-          content: metaDescription,
+          content: metaDescription ?? ``,
         },
         {
           property: `og:type`,
@@ -65,15 +67,15 @@ const SEO: React.FC<Props> = ({ description, lang, meta, title }) => {
         },
         {
           name: `twitter:creator`,
-          content: site.siteMetadata?.social?.twitter || ``,
+          content: data.site?.siteMetadata?.social?.twitter ?? ``,
         },
         {
           name: `twitter:title`,
-          content: title,
+          content: title ?? ``,
         },
         {
           name: `twitter:description`,
-          content: metaDescription,
+          content: metaDescription ?? ``,
         },
       ].concat(meta ?? [])}
     />

@@ -1,7 +1,8 @@
 import * as React from "react"
 import { Link, PageProps } from "gatsby"
+import { SiteSiteMetadata } from "../generated/graphql"
 
-type Props = Pick<PageProps, "location">
+type Props = Pick<PageProps, "location"> & Pick<SiteSiteMetadata, "title">
 
 const Layout: React.FC<Props> = ({ location, title, children }) => {
   const rootPath = `${__PATH_PREFIX__}/`

@@ -1,4 +1,5 @@
 .cache
+.eslintrc.js
 generated
 package.json
 public

@@ -2,7 +2,7 @@ import * as React from "react"
 import { graphql, PageProps } from "gatsby"
 
 import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Seo from "../components/seo"
 import { NotFoundQuery } from "../generated/graphql"
 
 const NotFoundPage: React.FC<PageProps<NotFoundQuery>> = ({
@@ -13,7 +13,7 @@ const NotFoundPage: React.FC<PageProps<NotFoundQuery>> = ({
 
   return (
     <Layout location={location} title={siteTitle}>
-      <SEO title="404: Not Found" />
+      <Seo title="404: Not Found" />
       <h1>404: Not Found</h1>
       <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
     </Layout>

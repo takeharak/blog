@@ -1,4 +1,5 @@
 .cache
 package.json
 public
+tsconfig.json
 yarn.lock

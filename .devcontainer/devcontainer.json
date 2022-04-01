@@ -17,6 +17,12 @@
 		"editor.defaultFormatter": "EditorConfig.EditorConfig",
 		"editor.renderControlCharacters": true,
 		"editor.renderWhitespace": "all",
+		"editor.quickSuggestions": {
+			"strings": true
+		},
+		"files.associations": {
+			"*.css": "tailwindcss"
+		},
 		"extensions.ignoreRecommendations": true,
 		"terminal.integrated.cwd": "${containerWorkspaceFolder}",
 		"vsintellicode.features.python.deepLearning": "disabled",
@@ -38,6 +44,7 @@
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
+		"bradlc.vscode-tailwindcss",
 		"editorconfig.editorconfig",
 		"esbenp.prettier-vscode",
 		"medo64.render-crlf",

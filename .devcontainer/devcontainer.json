@@ -23,6 +23,13 @@
 		"vsintellicode.java.completionsEnabled": false,
 		"vsintellicode.python.completionsEnabled": false,
 		"vsintellicode.sql.completionsEnabled": false,
+		"prettier.configPath": ".prettierrc",
+		"prettier.ignorePath": ".prettierignore",
+		"prettier.prettierPath": "./node_modules/prettier",
+		"prettier.requireConfig": true,
+		"prettier.semi": false,
+		"prettier.singleQuote": true,
+		"prettier.useEditorConfig": true,
 		"code-eol.highlightExtraWhitespace": true,
 		"code-eol.highlightNonDefault": true,
 		"typescript.tsdk": "./node_modules/typescript/lib"
@@ -32,6 +39,7 @@
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"editorconfig.editorconfig",
+		"esbenp.prettier-vscode",
 		"medo64.render-crlf",
 		"VisualStudioExptTeam.vscodeintellicode"
 	],

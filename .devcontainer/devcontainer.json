@@ -40,7 +40,7 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "yarn install",
+	"postCreateCommand": "sudo chown node .next node_modules && yarn install --frozen-lockfile",
 
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "node",
@@ -50,6 +50,9 @@
 	"workspaceFolder": "/workspace",
 	"mounts": [
 		// Avoiding extension reinstalls on container rebuild
-		"source=blog-extensions,target=/home/node/.vscode-server/extensions,type=volume"
+		"source=blog-extensions,target=/home/node/.vscode-server/extensions,type=volume",
+		// Use a targeted named volume
+		"source=blog-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume",
+		"source=blog-next,target=${containerWorkspaceFolder}/.next,type=volume"
 	],
 }

@@ -23,3 +23,4 @@ RUN su node -c "npm install -g editorconfig" \
     && su node -c "yarn config set scripts-prepend-node-path true --global"
 
 ENV EDITOR=code\ --wait
+ENV NEXT_TELEMETRY_DISABLED=1
